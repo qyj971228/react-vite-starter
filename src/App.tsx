@@ -1,8 +1,9 @@
+import { ReactNode } from 'react'
 import './App.css'
 
-function App() {
+function App({children}: {children: ReactNode}) {
   return (
-    <div>APP</div>
+    <div>APP{children}</div>
   )
 }
 
