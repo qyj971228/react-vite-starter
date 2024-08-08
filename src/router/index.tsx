@@ -3,7 +3,7 @@ import Home from '@/views/home'
 import Profile from '@/views/Profile'
 import NotFound from '@/views/404'
 import Banned from '@/views/403'
-import { Navigate, Outlet } from 'react-router-dom'
+import { RedirectTo } from '@/components/RedirectTo'
 
 export type RouteConfig = {
   path: string;
@@ -12,15 +12,6 @@ export type RouteConfig = {
   errorElement?: React.ReactNode;
   children?: RouteConfig[];
 };
-
-function RedirectTo(props: { to: string }) {
-  return (
-    <>
-      <Navigate to={props.to} replace />
-      <Outlet />
-    </>
-  )
-}
 
 export const subRouterConfigs: RouteConfig[] = [
   {
