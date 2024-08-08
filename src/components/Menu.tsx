@@ -8,15 +8,15 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 function setMenuItems(items: RouteConfig[], prePath?: string): MenuItem[] {
   return items.map(el => {
-    // children
-    let children: MenuItem[] | null = null
-    if (el.children && el.children.length) {
-      children = setMenuItems(el.children, el.path)
-    }
     // key
     let key: string = el.path
     if (prePath) {
       key = prePath + '/' + key // 子路由前面没有[/]
+    }
+    // children
+    let children: MenuItem[] | null = null
+    if (el.children && el.children.length) {
+      children = setMenuItems(el.children, key)
     }
     return {
       key,
@@ -28,30 +28,32 @@ function setMenuItems(items: RouteConfig[], prePath?: string): MenuItem[] {
 
 const routerItems: MenuItem[] = setMenuItems(routerConfigs)
 
-console.log(routerItems)
-
 const App: React.FC = () => {
 
   const navigate = useNavigate()
 
   const { pathname } = useLocation()
 
-  // 获取所在的上一级item
-  const getOpenItem = useCallback(() => {
+  const getOpenItemKeys = useCallback(() => {
+    const res: string[] = []
+    let add = ''
     const arr = pathname.split('/')
-    if (arr.length > 1) {
-      arr.pop()
-    }
-    return arr.join('/')
+    arr.forEach((el, i) => {
+      if (i !== 0 && i !== arr.length - 1) {
+        add += '/' + el
+        res.push(add)
+      }
+    })
+    return res
   }, [pathname]);
 
-  const [openKeys, setOpenKeys] = useState([getOpenItem()])
+  const [openKeys, setOpenKeys] = useState(getOpenItemKeys())
   const [selectedKeys, setSelectedKeys] = useState([pathname])
 
   useEffect(() => {
-    setOpenKeys([getOpenItem()])
+    setOpenKeys(getOpenItemKeys())
     setSelectedKeys([pathname])
-  }, [pathname, getOpenItem])
+  }, [pathname, getOpenItemKeys])
 
   const onHandleClick: MenuProps['onClick'] = (e) => {
     navigate(e.key)

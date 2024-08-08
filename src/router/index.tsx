@@ -45,14 +45,28 @@ export const routerConfigs: RouteConfig[] = [
   {
     path: '/user',
     name: '用户',
-    element: <RedirectTo to="/user/profile" />,
+    element: <RedirectTo to="/user/profile1" />,
     errorElement: <Error />,
     children: [
       {
-        path: 'profile',
-        name: '档案',
+        path: 'profile1',
+        name: '档案1',
         element: <Profile />,
         errorElement: <Error />,
+      },
+      {
+        path: 'profile2',
+        name: '档案2',
+        element: <RedirectTo to="/user/profile2/index" />,
+        errorElement: <Error />,
+        children: [
+          {
+            path: 'index',
+            name: 'index',
+            element: <Profile />,
+            errorElement: <Error />,
+          },
+        ]
       }
     ]
   }
