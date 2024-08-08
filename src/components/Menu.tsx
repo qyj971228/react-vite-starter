@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { RouteConfig, routerConfigs } from '@/router';
@@ -36,6 +36,14 @@ const App: React.FC = () => {
 
   const location = useLocation()
 
+  const [openKeys, setOpenKeys] = useState([getOpenItem()])
+  const [selectedKeys, setSelectedKeys] = useState([location.pathname])
+
+  useEffect(() => {
+    setOpenKeys([getOpenItem()])
+    setSelectedKeys([location.pathname])
+  }, [location.pathname])
+
   // 获取所在的上一级item
   function getOpenItem() {
     const arr = location.pathname.split('/')
@@ -45,16 +53,22 @@ const App: React.FC = () => {
     return arr.join('/')
   }
 
-  const onClick: MenuProps['onClick'] = (e) => {
+  const onHandleClick: MenuProps['onClick'] = (e) => {
     navigate(e.key)
+  };
+  const onHandleOpenChange = (keys: string[]) => {
+    setOpenKeys(keys);
   };
 
   return (
     <Menu
       className='overflow-y-auto w-[256px]'
-      onClick={onClick}
-      defaultOpenKeys={[getOpenItem()]}
-      defaultSelectedKeys={[location.pathname]}
+      onClick={onHandleClick}
+      onOpenChange={onHandleOpenChange}
+      defaultOpenKeys={openKeys}
+      defaultSelectedKeys={selectedKeys}
+      selectedKeys={selectedKeys}
+      openKeys={openKeys}
       mode="inline"
       items={routerItems}
     />
