@@ -10,9 +10,12 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
-    <Router>
-      <AppRoutes />
-    </Router>
+    <div>
+      <h3>Navigation</h3>
+      <Router>
+        <AppRoutes />
+      </Router>
+    </div>
   )
 }
 

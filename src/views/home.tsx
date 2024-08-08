@@ -1,4 +1,5 @@
 import { useBearStore } from '@/store/counter'
+import { Button } from 'antd'
 
 export default function Home() {
   const { bears, increase } = useBearStore()
@@ -10,7 +11,7 @@ export default function Home() {
     <div>
       <div>this is home</div>
       <div>bears{bears}</div>
-      <button onClick={onHandleButtonClick}>increase</button>
+      <Button onClick={onHandleButtonClick}>increase</Button>
     </div>
   )
 }
