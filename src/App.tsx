@@ -21,7 +21,7 @@ const App = () => {
       </h3>
       <div className="flex" style={{ height: 'calc(100vh - 150px)' }}>
         <Menu></Menu>
-        <div className='flex-1' >
+        <div className='flex-1 overflow-hidden' style={{ width: 'calc(100vw - 256px)' }}>
           <CurrentPath></CurrentPath>
           <AppRoutes />
         </div>
