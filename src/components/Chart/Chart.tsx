@@ -79,15 +79,15 @@ const Chart = forwardRef<ChartHandle, ChartProps>(
     // actions
     const dispatchAction = (config: echarts.Payload) => {
       if (!chartInstance) {
-        console.error("chartInstance is null or undefined");
+        console.warn("chartInstance is null or undefined");
         return;
       }
       chartInstance.dispatchAction(config);
     };
-    
+
     const on = (event: string, callback: (e: unknown) => void) => {
       if (!chartInstance) {
-        console.error("chartInstance is null or undefined");
+        console.warn("chartInstance is null or undefined");
         return;
       }
       chartInstance.off(event);

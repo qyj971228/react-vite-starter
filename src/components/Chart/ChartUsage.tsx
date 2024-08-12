@@ -3,6 +3,7 @@ import Chart, { ChartHandle } from "./Chart";
 import { throttle } from "lodash-es";
 import { Button } from "antd";
 import { markPoint } from "./markPoint";
+import useOpp from "@/hooks/useOpp";
 
 export default function Home() {
   const chartRef = useRef<ChartHandle>(null);
@@ -97,14 +98,27 @@ export default function Home() {
     chartConfig1(["1", "2", "3"], [{ date: "123", data: [1, 2, 3] }], "title")
   );
 
+  const [state, hide, show] = useOpp();
   function onHanldeChangeOption() {
-    setoption(
-      chartConfig1(
-        ["1", "2", "3", "4"],
-        [{ date: "123", data: [1, 2, 3] }],
-        "title"
-      )
-    );
+    if (!state) {
+      show();
+      setoption(
+        chartConfig1(
+          ["1", "2", "3", "4"],
+          [{ date: "123", data: [1, 2, 3] }],
+          "title"
+        )
+      );
+    } else {
+      hide();
+      setoption(
+        chartConfig1(
+          ["1", "2", "3"],
+          [{ date: "123", data: [1, 2, 3] }],
+          "title"
+        )
+      );
+    }
   }
 
   const onChartInstanceRendered = (instance?: echarts.ECharts) => {
