@@ -14,6 +14,7 @@ import useElementSize from "@/hooks/useElementSize";
 export interface ChartHandle {
   dispatchAction: (config: echarts.Payload) => void;
   on: (event: string, callback: (e: unknown) => void) => void;
+  getInstance: () => echarts.ECharts | void;
 }
 
 export interface ChartProps {
@@ -77,15 +78,15 @@ const Chart = forwardRef<ChartHandle, ChartProps>(
     }, [options, setOptions]);
 
     // actions
-    const dispatchAction = (config: echarts.Payload) => {
+    function dispatchAction(config: echarts.Payload) {
       if (!chartInstance) {
         console.warn("chartInstance is null or undefined");
         return;
       }
       chartInstance.dispatchAction(config);
-    };
+    }
 
-    const on = (event: string, callback: (e: unknown) => void) => {
+    function on(event: string, callback: (e: unknown) => void) {
       if (!chartInstance) {
         console.warn("chartInstance is null or undefined");
         return;
@@ -93,11 +94,18 @@ const Chart = forwardRef<ChartHandle, ChartProps>(
       chartInstance.off(event);
       chartInstance.on(event, callback);
       actionsRef.current.push(event);
-    };
+    }
+
+    function getInstance() {
+      if (chartInstance) {
+        return chartInstance;
+      }
+    }
 
     useImperativeHandle(ref, () => ({
       dispatchAction,
       on,
+      getInstance,
     }));
 
     return (
