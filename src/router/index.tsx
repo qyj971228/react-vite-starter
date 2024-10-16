@@ -6,12 +6,12 @@ import Banned from '@/views/403'
 import { RedirectTo } from '@/components/RedirectTo'
 
 export type RouteConfig = {
-  path: string;
-  name: string;
-  element: React.ReactNode;
-  errorElement?: React.ReactNode;
-  children?: RouteConfig[];
-};
+  path: string
+  name: string
+  element: React.ReactNode
+  errorElement?: React.ReactNode
+  children?: RouteConfig[]
+}
 
 export const subRouterConfigs: RouteConfig[] = [
   {
@@ -36,7 +36,7 @@ export const routerConfigs: RouteConfig[] = [
   {
     path: '/user',
     name: '用户',
-    element: <RedirectTo to="/user/profile1" />,
+    element: <RedirectTo to='/user/profile1' />,
     errorElement: <Error />,
     children: [
       {
@@ -48,7 +48,7 @@ export const routerConfigs: RouteConfig[] = [
       {
         path: 'profile2',
         name: '档案2',
-        element: <RedirectTo to="/user/profile2/index" />,
+        element: <RedirectTo to='/user/profile2/index' />,
         errorElement: <Error />,
         children: [
           {
@@ -57,8 +57,8 @@ export const routerConfigs: RouteConfig[] = [
             element: <Profile />,
             errorElement: <Error />,
           },
-        ]
-      }
-    ]
-  }
+        ],
+      },
+    ],
+  },
 ]

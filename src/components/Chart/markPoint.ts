@@ -1,24 +1,21 @@
 export const markPoint = (name: string, color: string, unit: string) => ({
-  symbol: "",
+  symbol: '',
   symbolSize: 0,
   label: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     formatter: (params: any) =>
-      `{icon|}` +
-      `{name|${name}}` +
-      "\n" +
-      `{text|${params.value.toFixed(2) + unit}}`,
-    color: "#333",
-    backgroundColor: "#fff",
+      `{icon|}` + `{name|${name}}` + '\n' + `{text|${params.value.toFixed(2) + unit}}`,
+    color: '#333',
+    backgroundColor: '#fff',
     offset: [0, -30],
     padding: [2, 10, 2, 10],
     lineHeight: 20,
     borderRadius: 4,
     shadowBlur: 3,
-    shadowColor: "#888",
+    shadowColor: '#888',
     shadowOffsetX: 0,
     shadowOffsetY: 1,
-    align: "center",
+    align: 'center',
     rich: {
       icon: {
         backgroundColor: color,
@@ -28,7 +25,7 @@ export const markPoint = (name: string, color: string, unit: string) => ({
       },
       name: {
         padding: [0, 10, 0, 10],
-        color: "#666666",
+        color: '#666666',
         fontSize: 14,
       },
       val: {
@@ -42,8 +39,8 @@ export const markPoint = (name: string, color: string, unit: string) => ({
   },
   data: [
     {
-      type: "max",
-      name: "最大值",
+      type: 'max',
+      name: '最大值',
       // symbolOffset: [0, -20]
     },
     // {
@@ -52,4 +49,4 @@ export const markPoint = (name: string, color: string, unit: string) => ({
     //   symbolOffset: [0, -10]
     // }
   ],
-});
+})

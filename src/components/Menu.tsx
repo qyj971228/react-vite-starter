@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import type { MenuProps } from 'antd';
-import { Menu } from 'antd';
-import { RouteConfig, routerConfigs } from '@/router';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react'
+import type { MenuProps } from 'antd'
+import { Menu } from 'antd'
+import { RouteConfig, routerConfigs } from '@/router'
+import { useLocation, useNavigate } from 'react-router-dom'
 
-type MenuItem = Required<MenuProps>['items'][number];
+type MenuItem = Required<MenuProps>['items'][number]
 
 function setMenuItems(items: RouteConfig[], prePath?: string): MenuItem[] {
   return items.map(el => {
@@ -21,7 +21,7 @@ function setMenuItems(items: RouteConfig[], prePath?: string): MenuItem[] {
     return {
       key,
       label: el.name,
-      children
+      children,
     }
   })
 }
@@ -29,7 +29,6 @@ function setMenuItems(items: RouteConfig[], prePath?: string): MenuItem[] {
 const routerItems: MenuItem[] = setMenuItems(routerConfigs)
 
 const App: React.FC = () => {
-
   const navigate = useNavigate()
 
   const { pathname } = useLocation()
@@ -45,7 +44,7 @@ const App: React.FC = () => {
       }
     })
     return res
-  }, [pathname]);
+  }, [pathname])
 
   const [openKeys, setOpenKeys] = useState(getOpenItemKeys())
   const [selectedKeys, setSelectedKeys] = useState([pathname])
@@ -55,12 +54,12 @@ const App: React.FC = () => {
     setSelectedKeys([pathname])
   }, [pathname, getOpenItemKeys])
 
-  const onHandleClick: MenuProps['onClick'] = (e) => {
+  const onHandleClick: MenuProps['onClick'] = e => {
     navigate(e.key)
-  };
+  }
   const onHandleOpenChange = (keys: string[]) => {
-    setOpenKeys(keys);
-  };
+    setOpenKeys(keys)
+  }
 
   return (
     <Menu
@@ -71,10 +70,10 @@ const App: React.FC = () => {
       defaultSelectedKeys={selectedKeys}
       selectedKeys={selectedKeys}
       openKeys={openKeys}
-      mode="inline"
+      mode='inline'
       items={routerItems}
     />
-  );
-};
+  )
+}
 
-export default App;
+export default App
